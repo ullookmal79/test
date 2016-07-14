@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		var ss=0;  var mm=0;  var hh=0;
+
+		function load(){
+			
+		}
+
+		function start(){
+			ss++;
+			document.getElementById("ss").value=ss;
+			setTimeout("start()", 100);
+			if(ss==60){
+				mm++;
+				ss=0;
+			}
+			if(mm==60){
+				hh+=;
+				mm=0;
+			}
+		}
+		
+
+	</script>
+</head>
+<body onLoad="load()">
+	<input id="hh" type="txtHh" value="">
+	<input id="mm" type="txtMm" value="">
+	<input id="ss" type="txtSs" value="">
+	<input type="button" value="시작" onClick="start()">
+	<input type="button" value="정지">
+</body>
+</html>

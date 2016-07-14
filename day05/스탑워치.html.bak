@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#txt{
+			width:200px;
+			height:100px;
+			font-size:40pt;
+			font-weight:bold;
+			color:red;
+			background:yellow;
+			text-align:right;
+		}
+		
+	</style>
+	<script>
+		var ss = 0;
+		var st = 0;
+		function load(){
+			document.getElementById("txt").value=0;
+		}
+		function start(){
+			ss++;
+			document.getElementById("txt").value=ss;	
+			st = setTimeout("start()", 10);
+			//버튼 비활성화 시키기
+			document.getElementById("btnStart").disabled=true;
+		}
+		function stop(){
+			//기존 셋타임아웃에 의한 자동호출을 중지!
+			clearTimeout(st);
+			document.getElementById("btnStart").disalbed=false;
+		}
+		/*function count(){
+			setInterval("start()", 1000);
+		}*/
+	</script>
+</head>
+<body onLoad="load()">		
+<!-- onLoad()는 body태그가 적당하다. -->
+	<input id="txt" type="text" value="">
+	<input id="btnStart" type="button" value="시작" onClick="start()">
+	<input type="button" value="정지" onClick="stop()">
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body>
+	<input id = "txt01" type = "text" value = "0">
+	<input type = "button" value = "카운터 증가" onClick="add()">
+	<!-- onClick은 html, "alert()"은 javascript -->
+</body>
+</html>
+	<script>
+		var x = 0;			//전역변수 : 프로세스, 즉, 현재 실행중인 브라우저를 종료할 때 메모리에서 소멸
+		//버튼을 누르면, 수행할 코드 영역
+		function add(){
+			//버튼을 누르면, 카운터값을 1씩 증가시켜,  텍스트입력 상자에 뿌리자
+			//var x = 0;				//지역변수 : {}영역내에서만 메모리에 존재하는 변수
+			
+			document.getElementById("txt01").value = x;		
+			x++;
+			//document.getElementById("txt01") == id가 "txt01"인 오브젝트
+			alert();
+		}
+
+		add();
+
+	</script>

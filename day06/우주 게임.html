@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			margin:0px;
+		}
+		#bg{
+			width:100%;
+			height:388px;
+			background-image:url("../images/space.jpg") ;
+			background-repeat: repeat-x;
+		}
+		#spShip{
+			position:absolute;
+			width:100px;
+			left:20px;
+			top:200px;
+		}
+		/*총알을 화면에서 안보이게 하려면 left값을 음수화*/
+		#bullet{
+			position:absolute;
+			left:-50px;
+			top:200px;
+			width:50px;
+		}
+	</style>
+	<script>
+		var x = 0;
+		var a=20;  var b=200;
+		var bX = 0;
+		//문서가 로드되면, 배경을 x축 방향으로 감소시키자!
+		function init(){
+			x-=1;
+			document.getElementById("bg").style.backgroundPosition=x + "px 0px";
+			setTimeout("init()", 10);
+		}
+
+		function move(){
+			var key= event.keyCode;
+			var spShip=document.getElementById("spShip")
+			var bX = 0;
+
+			if(key==37){
+				a-=3;
+				//spShip.style.left=(20+a) + "px";
+			}
+			else if(key==38){
+				b-=3;
+				//spShip.style.top=(200+b) + "px";
+			}
+			else if(key==39){
+				a+=3;
+				//spShip.style.left=(20+a) + "px";
+			}
+			else if(key==40){
+				b+=3;
+				//spShip.style.top=(200+b) + "px";
+			}
+			else if(key==32){ 
+				//alert();
+				fire();
+			}
+
+			spShip.style.left=a+"px"; 
+			spShip.style.top=b+"px";
+		}
+
+		function fire(){
+			//alert("fire");
+			bX+=10;
+			document.getElementById("bullet").style.left=bX+"px";
+
+			setTimeout("fire()", 10);
+		}
+
+	</script>
+<script>
+
+	</script>
+</head>
+<body onLoad="init()" onKeyDown="move()">
+	<div id="bg">
+		<img id="spShip" src="../images/spaceship.jpg">
+		<img id="bullet" src="../images/bullet.png">
+	</div>
+	
+</body>
+</html>

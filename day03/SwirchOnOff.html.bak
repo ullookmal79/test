@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SwitchOnOff</title>
+	<style>
+		input{
+			width : 200px;
+			height : 60px;
+			background : #99cccc;
+			font-size:20pt;
+			color:#660033;
+		}
+		body{
+		}
+	</style>
+	<script>
+		var flag = true; 
+
+		function switchOn(){
+			document.body.style.background="yellow";
+		}
+		function switchOff(){
+			document.body.style.background="black";
+		}
+		function Toggle(){
+			document.body.style.background=(document.body.style.background=="yellow") ? ("black") : ("yellow");
+		}
+		function Toggle2(){
+			flag = (flag==true) ? (false) : (true);
+			document.body.style.background=(flag==true) ? ("yellow") : ("black");
+			flag != flag;
+			
+		}
+		/*function Toggle3(){
+			
+
+		}*/
+	</script>
+</head>
+<body>
+	<input type="button" value="ON" onClick="switchOn()">
+	<input type="button" value="OFF" onClick="switchOff()">
+	<input type="button" value="TOGGLE" onClick="Toggle()">
+	<input type="button" value="TOGGLE2" onClick="Toggle2()">
+	<!--<input type="button" value="TOGGLE3" onClick="Toggle3()">-->
+</body>
+</html>
+
+
+
+

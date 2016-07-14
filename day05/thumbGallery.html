@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{
+			border:2px solid red;
+			width:600px;
+			height:650px;
+			margin:auto;
+		}
+	</style>
+	<script>
+		function setImg(n){
+			document.getElementById("mainImg").src="../images/minions/"+n+".jpg";
+		}
+	</script>
+</head>
+<body>
+<div>
+	<table width="100%">
+		<tr>
+			<td><img  src="../images/minions/1.jpg" width="50px" width="50px" onMouseOver="setImg('1')"></td>
+			<td><img  src="../images/minions/2.jpg" width="50px" width="50px" onMouseOver="setImg('2')"></td>
+			<td><img  src="../images/minions/3.jpg" width="50px" width="50px" onMouseOver="setImg('3')"></td>
+			<td><img  src="../images/minions/4.jpg" width="50px" width="50px" onMouseOver="setImg('4')"></td>
+			<td><img  src="../images/minions/5.jpg" width="50px" width="50px" onMouseOver="setImg('5')"></td>
+			<td><img  src="../images/minions/6.jpg" width="50px" width="50px" onMouseOver="setImg('6')"></td>
+			<td><img  src="../images/minions/7.jpg" width="50px" width="50px" onMouseOver="setImg('7')"></td>
+			<td><img  src="../images/minions/8.jpg" width="50px" width="50px" onMouseOver="setImg('8')"></td>
+			<td><img  src="../images/minions/9.jpg" width="50px" width="50px" onMouseOver="setImg('9')"></td>
+		<td><img  src="../images/minions/10.jpg" width="50px" width="50px" onMouseOver="setImg('10')"></td>
+		</tr>
+	</table>
+	<img  id="mainImg" src="../images/minions.jpg" width="100%" width="50px">
+</div>
+</body>
+</html>

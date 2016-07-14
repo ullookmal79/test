@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	#phoneView{
+		width:300px;
+		height:500px;
+		padding:10px;
+		border:solid black 1px;
+		margin:auto;
+	}
+	#textEx{
+		height:23%;
+		width:100%;
+		font-size:50pt;
+		text-align:center;
+		vertical-align:middle;
+		padding:auto;
+		margin:auto;
+	}
+	#text{
+		height:23%;
+		width:100%;
+		font-size:50pt;
+		text-align:center;
+		margin:auto;
+		margin-top:5px;
+	}
+	#ox{
+		height:23%;
+		width:100%;
+		font-size:30pt;
+		text-align:center;
+		vertical-align:middle;
+		margin:auto;
+		margin-top:5px;
+		border:1px solid black;
+	}
+	#score{
+		height:23%;
+		width:100%;
+		font-size:30pt;
+		text-align:center;
+		vertical-align:middle;
+		margin:auto;
+		margin-top:5px;
+		border:1px solid black;
+	}
+</style>
+<script>
+	//배열의 인덱스를 결정하는 전역변수
+	var count=0;
+	var jumsu=0;		//누적될 점수
+	var word=new Array();
+	word[0]="aaa";
+	word[1]="bbb";
+	word[2]="ccc";
+	word[3]="ddd";
+	word[4]="eee";
+	word[5]="fff";
+	word[6]="ggg";
+	word[7]="hhh";
+	word[8]="iii";
+	word[9]="jjj";
+//게임가동과 동시에 초기에 하고싶은 작업
+	function init(){
+		//기본 텍스트예시가 나온다.
+		var txtEx=document.getElementById("textEx");
+		txtEx.innerText=word[count];
+
+		//커서를 자동으로 올린다.
+	var txt=document.getElementById("text");
+		txt.focus();
+	}
+	
+	//키보드를 눌렀다 뗄때
+	function enter(){
+		//사용자가 입력한 키보드의 아스키값
+		var key=event.keyCode;
+		var txtInput=document.getElementById("text").value;
+		if(key==13){
+			count++;
+			if(count>9){
+
+				console.log(word[count]);
+				count=0;
+			}
+
+			if(txtInput.value==word[count]){
+				alert("일치");
+				document.getElementById("ox").innerText="0";
+				jumsu+=10;
+			}
+			else{
+				alert("불일치");
+				document.getElementById("ox").innerText="X";
+			}
+				
+			txtInput="";
+				
+			document.getElementById("textEx").innerText=word[count];
+		}
+		
+	}
+
+</script>
+<body onLoad="init()">
+	<div id="phoneView">
+		<div id="textEx">광화문</div>
+		<input id="text" type="text" onKeyUp="enter()">
+		<div id="ox"></div>
+		<div id="score">0점</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{margin:0px;}
+		#stage{
+			width:1000px;
+			height:800px;
+			background-image: url("../images/gallerxy/bg.png");
+		}
+	</style>
+	<script src="../lib/lib.js"></script>
+	<script src="../lib/hero.js"></script>
+	<script src="../lib/Enemy.js"></script>
+	<script src="../lib/Bullet2.js"></script>
+	<script>
+		var stage;
+		var bgY = 0;
+		var hero;
+		//적군 배열
+		var allArr = new Array();
+		var kingArr = new Array(15);
+		var enemyArr = new Array(90); 
+
+		allArr[0] = kingArr;
+		allArr[1] = enemyArr;
+
+		window.addEventListener("load", function(){
+			stage = document.getElementById("stage");
+			bgEffect();
+
+			//배열에 적군 넣기
+			for(var i=0; i<15; i++){
+				if(i>=0 && i<6)
+					kingArr[i] = "../images/gallerxy/blue_king.png";
+				else
+					kingArr[i] = "../images/gallerxy/green_king.png";
+			}
+			for(var i=0; i<90; i++){
+				if(i>=0 && i<45)
+					enemyArr[i] = "../images/gallerxy/enermy1.png";
+				else
+					enemyArr[i] = "../images/gallerxy/enermy2.png";
+			}
+
+			
+			//주인공 등장
+			hero = new Hero(stage, 30, 30, 475, 730);
+			hero.init();
+
+			//적군 등장!
+			var x=0;		var y = 0;		var src;
+			for(var i=0; i<15; i++){
+				if(i%15==0){
+						y +=50;
+						x = 130;
+				}
+				else
+					x += 50;
+				var enemy = new Enemy(stage, 40, 40, x, y, kingArr[i]);
+				enemy.init();
+
+				kingArr[i]=enemy;
+			}
+			for(var i=0; i<90; i++){
+				if(i%15==0){
+						y +=50;
+						x = 130;
+				}
+				else
+					x += 50;
+				var enemy = new Enemy(stage, 20, 20, x, y, enemyArr[i]);
+				enemy.init();
+
+				enemyArr[i]=enemy;
+			}
+ 		});
+ 
+		//키보드 입력 처리
+		window.addEventListener("keydown", function(){
+			var key = event.keyCode;		//입력한 아스키코드 값
+
+			switch(key){	//소괄호에 조건 판단 대상이 되는 데이터
+				case 37:
+					hero.velX -=2; 		break;
+				case 39:
+					hero.velX +=2;		break;
+				case 32:
+					fire();
+					//test();
+					break;
+			}
+		});
+
+		window.addEventListener("keyup", function(){
+			//var key = event.keyCode;
+			//if(key==37 || key==38 || key==39 || key==40)
+				hero.velX = 0;
+		}); 
+
+		function bgEffect(){
+			bgY += 10;
+			stage.style.backgroundPosition="0px "+bgY+"px";
+			setTimeout("bgEffect()", 100);
+		}
+
+		function fire(){
+			//스페이스바를 누를때마다 총알 인스턴스 생성!
+			var bullet = new Bullet2(stage, 10, 20, hero.x+10, hero.y-10);
+			bullet.init();
+		}  
+
+		var testCount = 0;
+		function test(){
+			stage.removeChild(enemyArr[testCount].img);
+			testCount++;
+		}
+
+	</script>
+</head>
+<body>
+	<div id="stage"></div>
+</body>
+</html>

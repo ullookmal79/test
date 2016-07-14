@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+	<script>
+		var stage;
+
+		function init(){
+			stage = document.getElementById("stage");
+			var s = new Ship(100, 100, 100, 70, stage);
+
+		}
+
+		//객체 만들기
+		var Ship = function(left, top, width, height, area){
+			this.x;					//left
+			this.y;					//top
+			this.width;				//너비
+			this.height;			//높이
+			this.img;				//img  ,받을 매개변수 x
+			this.area;				//img의 상위 영역 ex) stage
+
+			this.init(){
+				
+				this.move();
+			}
+
+			this.move(){
+			
+			}
+		}
+	</script>
+</head>
+<body onLoad="init()" >
+	<div id="stage"></div>
+</body>
+</html>

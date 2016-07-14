@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+	<script>
+		function loginCheck(){
+			//유효성 체크
+			
+			if(document.getElementById("member_id").value==""){
+				alert("id입력해!");
+				document.getElementById("member_id").focus();
+				return;
+			}
+			else if(!document.getElementById("member_ipw").value){
+				alert("pw입력해!");
+				document.getElementById("member_pw").focus();
+				return;
+			}
+			
+				location.href="http://daum.net";
+		}0
+		
+		
+	</script>
+</head>
+<body> 
+	<table width="300px" border="1px" align="center">
+		<tr>
+			<td>ID</td>
+			<td><input id="member_id" type="text" maxlength="8"></td>
+		</tr>
+		<tr>
+			<td>PW</td>
+			<td><input id="member_pw" type="password" maxlength="8"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" value="회원가입">
+				<input type="button" value="ID/PW찾기">
+				<input type="button" value="로그인" onClick="loginCheck()">
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

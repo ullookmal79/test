@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#stage{
+			width:800px;
+			height:600px;
+			margin:auto;
+		}
+		#inputData{
+			width:150px;
+			height:600px;
+			background:#3399ff;
+			float:left;
+		}
+		#showData{
+			width:650px;
+			height:600px;
+			background:#ffcc99;
+			float:left;
+		}
+	</style>
+	<script>
+		var id; 
+		var pw;
+		var name;
+		var money;
+		var btn;
+	
+		//table 변수들
+		var table;
+
+		var showData;
+
+		window.addEventListener("load", function(){
+			init();
+		});
+
+		function init(){
+			id = document.getElementById("id");
+			pw = document.getElementById("pw");
+			name = document.getElementById("name");
+			money = document.getElementById("money");
+			btn = document.getElementById("btn");
+
+			showData = document.getElementById("showData");
+
+			//실행시킬 함수
+			pass();
+			getTitle();
+		}
+
+		function pass(){
+			btn.addEventListener("click", function(){
+				if(!id.value){
+					alert("id를 입력하세요!");
+					id.focus();
+				}
+				else if(!pw.value){
+					alert("pw를 입력하세요!");
+					pw.focus();
+				}
+				else if(!name.value){
+					alert("name을 입력하세요!");
+					name.focus();
+				}
+				else if(!money.value){
+					alert("money를 입력하세요!");
+					money.focus();
+				}
+			});
+			
+		}
+
+		function getTitle(){
+			//초기화 작업
+			table = document.createElement("table");
+			table.style.width = 600 + "px";
+			table.style.border = 1+ "px";
+
+			var columnTr = document.createElement("tr");
+			var noTd = document.createElement("td");
+				noTd.innerText = "no";
+			var pwTd = document.createElement("td");
+				pwTd.innerText = "PW";
+			var nameTd = document.createElement("td");
+				nameTd.innerText = "NAME";
+			var moneyTd = document.createElement("td");
+				moneyTd.innerText = "MONEY";
+			
+			//td -> tr로 appendChild 작업
+			columnTr.appendChild(noTd);
+			columnTr.appendChild(pwTd);
+			columnTr.appendChild(nameTd);
+			columnTr.appendChild(moneyTd);
+			//tr -> table로 appendChild 작업
+			table.appendChild(columnTr);
+		}
+
+	</script>
+</head>
+<body>
+	<div id="stage">
+		<div id="inputData">
+			ID:<input id="id" type="text"><br>
+			PW:<input id="pw" type="text"><br>
+			NAME:<input id="name" type="text"><br>
+			MONEY:<input id="money" type="text"><br>
+			<input id="btn" type="button" value="확인">
+		</div>
+		<div id="showData">
+			
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	</style>
+	<script src = "../lib/퍼즐.js"></script>
+	<script>
+		var stage;
+		var image;
+		//가로 세로 800,  box = 100*100
+		var boxArr = new Array();
+		var color = [
+			"red", "orange", "yellow", "green", "blue", "navy", "purple"
+		];
+
+		window.addEventListener("load", function(){
+			stage = document.createElement("div");
+			stage.style.width = "800px";
+			stage.style.height = "800px";
+			//stage.style.background = "#ffcc99";
+			stage.style.margin = "auto";
+			//stage.style.background-repeat = no-repeat;
+			stage.style.backgroundImage = "url('../images/minion.jpg')";
+			document.body.appendChild(stage);
+
+			createBox();
+		});
+
+		function createBox(){
+			var a = 64;
+			for(var i=0; i<a; i++){
+				var r = parseInt(color.length*Math.random());
+				var p = new Puzzle(stage, 100, 100, color[r]);
+				p.init();
+			}
+		}
+	
+
+	</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#wrapper{
+			width:600px;
+			height:650px;
+			background:yellow;
+			margin:auto;
+			
+		}
+		/*한칸 띄우면, 안쪽의 하위요소에 적용*/
+		#controller img{
+			
+			height:50px;
+			background:#663399;
+			/*div안쪽의 내용물에 대한 중앙정렬*/
+			
+			width:70px;
+			margin:auto;
+			vertical-align: middle;
+		
+		}
+		#btn_prev{
+			transform:rotate(180deg);
+		}
+		#big{
+			height:600px;
+			
+		}
+	</style>
+	<script>
+		//문서내의 큰 이미지의 src를 변경하자.
+		var n=0;
+		function next(){
+			n++;
+			document.getElementById("big").src="../images/minions/"+n+".jpg";
+			if(n==10)
+				n=0;
+		}
+	
+		function auto(){
+			setInterval("next()", 1000);
+		}
+	</script>
+</head>
+<body>
+	<div id="wrapper">
+		<img id="big" src="../images/minions.jpg"  >
+		<div id="controller">
+			<img id="btn_prev" src="../images/bt.png">	
+			<img id="btn_auto" src="../images/btn_auto.png" onClick="auto()">	
+			<img id="btn_next" src="../images/bt.png" onClick="next()">	
+		</div>
+	</div>
+</body>
+</html>

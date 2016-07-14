@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#gallery{
+			border:1px solid black;
+			width:500px;
+			height:350px;
+			vertical-align:middle; 
+			text-align:center; 
+			padding:5px;
+			margin:auto;
+		}
+		#image{
+			height:250px;
+			margin:auto;
+		}
+		#button{
+			top:150px;
+			vertical-align:middle;
+		}
+	</style>
+	<script>
+		var count=0;
+		var photo=new Array();
+		photo[0]="aaa.jpg";
+		photo[1]="bbb.jpg";
+		photo[2]="ccc.jpg";
+		photo[3]="ddd.jpg";
+		photo[4]="eee.jpg";
+		photo[5]="fff.jpg";
+		photo[6]="ggg.jpg";
+	photo[7]="hhh.jpg";
+		photo[8]="iii.jpg";
+		photo[9]="jjj.jpg";
+
+		function prev(){
+			count--;
+			if(count<0){
+				alert("이전 이미지가 없습니다.");
+				count=0;
+			}
+			document.getElementById("image").src="../images/minions/"+photo[count];
+		}
+
+		function next(){
+			count++;
+			if(count>9){
+				alert("다음 이미지가 없습니다.");
+				count=9;
+			}
+			document.getElementById("image").src="../images/minions/"+photo[count];
+		}
+	</script>
+</head>
+<body>
+	<div id="gallery">
+		<img id="image" src="../images/minions/aaa.jpg">
+		<div id="button">
+			<input id="prev" type="button" value="◁" onClick="prev()">
+			<input id="next" type="button" value="▷" onClick="next()">
+		</div>
+	</div>
+
+</body>
+</html>

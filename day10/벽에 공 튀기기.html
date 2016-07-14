@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{margin:0px;}
+		#stage{
+			border:1px solid red;
+		}
+	</style>
+	<script src="../lib/lib.js"></script>
+	<script>
+		var stage;
+		var stageWidth = 800;
+		var stageHeight = 800;
+
+		var ballImg = [
+			"baseball",
+			"basketball",
+			"bowling",
+			"cricket",
+			"footbal",
+			"golf",
+			"snooker",
+			"soccer",
+			"tennis",
+			"volleyball"
+		];
+
+		//Ball 객체 정의
+		var Ball = function(stage, width, height, x, y, velX, velY, src){
+			stage = stage;
+			this.img;
+			this.width = width;
+			this.height = height;
+			this.x = x;
+			this.y = y;
+			this.src = src;
+			this.velX = velX;		//x축으로 몇 픽셀씩 움직일지...
+			this.velY = velY;
+			this.rotate = 0;
+			
+			
+			this.init = function(){
+				stage = document.getElementById("stage");
+				this.img = document.createElement("img");
+				this.img.src = this.src;
+				this.img.style.width = this.width + "px";
+				this.img.style.height = this.height + "px";
+				this.img.style.position = "absolute";
+				this.img.style.left = this.x + "px";
+				this.img.style.top = this.y + "px";
+
+				stage.appendChild(this.img);
+		
+				//move()함수 시작
+				this.move();
+			}
+
+			this.move = function(){
+				var me = this;
+				
+				//양수방향으로 회전시키기
+				this.rotate += 2;
+				this.img.style.transform = "rotate("+this.rotate+"deg)";
+
+				this.x +=this.velX;
+				this.y +=this.velY;
+				
+				//우측 벽으로 나가는지 판단!!
+				if((this.x >= stageWidth-this.width) || (this.x <= 0)){
+					this.velX = -1*this.velX;
+					console.log("좌측, 우측 벽 도달!" + this.x);
+				}
+				if((this.y >= stageHeight-this.height) || (this.y <= 0)){
+					this.velY = -1*this.velY;
+					console.log("위쪽, 아래쪽 벽 도달!" + this.y);
+				}
+
+				//이동하기 -> x축, y축의 변화
+				this.img.style.left = this.x + "px";
+				this.img.style.top = this.y + "px";
+
+				setTimeout(function(){
+					me.move();
+				}, 10);
+			}
+		}
+
+		//문서가 로드되면
+		window.addEventListener("load", function(){
+			stage = document.getElementById("stage");
+
+			stage.style.width = stageWidth + "px";
+			stage.style.height = stageHeight + "px";
+
+		});
+
+		//스페이스바를 누르면
+		window.addEventListener("keydown", function(){
+			//볼을 탄생시키자!!
+			if(event.keyCode == 32){
+				var r = parseInt(ballImg.length*Math.random());
+				var img = "../images/ball/"+ballImg[r]+".png"
+
+				//x의 증가량에 대한 범위 랜덤설정
+				var rx = getRandomByRange(5, 2);
+
+				//y의 증가량에 대한 범위 랜덤설정
+				var ry = getRandomByRange(7, 1);
+
+				var ball = new Ball(stage, 100, 100, 0, 0, rx, ry, img);
+				ball.init();
+			}
+		});
+
+		
+	</script>
+</head>
+<body>
+	<div id="stage"></div>
+</body>
+</html>

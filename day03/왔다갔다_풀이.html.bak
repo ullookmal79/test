@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#star{
+		position:absolute;
+		left:0px;
+		top:200px;
+	}
+	</style>
+	<script>
+		//문서 내의 
+		function move(){
+			
+		}
+	</script>
+</head>
+<body>
+	<input type="button" value="이동" onClick="move()">
+
+	<!--마크업 지정만 하고자 할때, span 태그-->
+	<span id="star">★</span>
+
+</body>
+</html>

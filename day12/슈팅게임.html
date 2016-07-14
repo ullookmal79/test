@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{margin:0px;}
+		#stage{
+			width:100%;
+			height:800px;
+			background:url("../images/space.jpg");
+		}
+	</style>
+	<script src="../lib/lib.js"></script>
+	<script src="../lib/Unit.js"></script>
+	<script src="../lib/Bullet.js"></script>
+	<script src="../lib/Hero.js"></script>
+
+	<script>
+		var stage;
+		var srcShip = "../images/spaceship.jpg"
+		var bgX=0;
+		var hero;
+		var enemyArray = new Array();
+
+		window.addEventListener("load", function(){
+			init();
+		});
+
+		function init(){
+			stage = document.getElementById("stage");
+			stage.style.width = screen.width+"px";
+			stage.style.height = 800+"px";
+
+			bgEffect();
+		
+			//우주선 등장
+			hero = new Hero(stage, 150, 100, 100, 100, srcShip);
+			hero.init();
+
+			//적군등장
+			for(var i = 0; i<10; i++){
+				var unit = new Unit(stage, 100, 113, screen.width-200, 50+i*70, "../images/warior/image1.png");
+				enemyArray.push(unit);
+				unit.init();
+			}
+		}
+
+		//우주선에 대한 상하좌우 이벤트 처리
+		window.addEventListener("keydown", function(){
+			var key = event.keyCode;
+
+			switch(key){
+				case 32:	fire();						break;
+				case 37:	hero.velX = (-2);		break;
+				case 38:	hero.velY = (-2);		break;
+				case 39:	hero.velX = 2;			break;
+				case 40:	hero.velY = 2;			break;
+			}
+		});
+
+		window.addEventListener("keyup", function(){
+			//방향키에 대해서만 한정
+			var key = event.keyCode;
+			if(key==37 || key==38 || key==39 || key==40){
+				hero.velX = 0;
+				hero.velY = 0;
+			}
+		});
+
+		function fire(){
+			var bullet = new Bullet(stage, hero.x+hero.width, hero.y+50);
+			bullet.init();
+		}
+
+		function bgEffect(){
+			bgX-=5;
+			stage.style.backgroundPosition=bgX+"px 0px";
+			setTimeout("bgEffect()", 100);
+		}
+
+	</script>
+</head>
+<body>
+	<div id="stage"></div>
+</body>
+</html>

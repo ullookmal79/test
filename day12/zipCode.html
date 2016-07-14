@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		var zC;
+		var zC1;	var zC2;
+
+		function setPost(){
+			zC = document.getElementById("zipCode1");
+			zC = zC.text;
+			//zC = form2.zipCode1.text.split("-");
+			zC1 = zC[0];		zC2 = zC[1];
+			console.log(zC1);
+			console.log(zC2);
+
+			opener.document.form1.zipCode1.value=zC1;
+			opener.document.form1.zipCode2.value=zC2;
+		}
+	</script>
+</head>
+<body >
+	<form name="form2">
+	<table	width="100%"	border="1px">
+		<tr>
+			<td colspan="2" align="center">
+				<input type="text">
+				<img src="/images/searChIcon.png"	width="20px" onClick="">
+			</td>
+		</tr>
+		<tr>
+			<td>우편번호</td><td>주소</td>
+		</tr>
+		<tr onMouseOver="this.style.background='#66ffff'" onMouseOut="this.style.background=''">
+			<td><a
+			href="javascript:setPost()">111-111</a></td><td>aaa시 aaa구</td>
+		</tr>
+		<tr onMouseOver="this.style.background='#66ffff'" onMouseOut="this.style.background=''">
+			<td><a href>222-222</a></td><td>bbb시 bbb구</td>
+		</tr>
+		<tr onMouseOver="this.style.background='#66ffff'" onMouseOut="this.style.background=''">
+			<td><a href>333-333</a></td><td>ccc시 ccc구</td>
+		</tr>
+		<tr onMouseOver="this.style.background='#66ffff'" onMouseOut="this.style.background=''">
+			<td><a href>444-444</a></td><td>ddd시 ddd구</td>
+		</tr>
+		<tr onMouseOver="this.style.background='#66ffff'" onMouseOut="this.style.background=''">
+			<td><a	 href>555-555</a></td><td>eee시 eee구</td>
+		</tr>
+	</table>
+	</form>
+</body>
+</html>

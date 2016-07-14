@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#minion{
+			position:absolute;			
+			left:300px;			
+			top:300px;
+			transform:rotate(0deg);	
+			transform:scale(1, 1);
+		}
+	</style>
+	<script>
+		var c = 300; var r =300; var d = 0; var w = 1; var h = 1;
+		function moveLeft(){
+			c-=10;
+			document.getElementById("minion").style.left = c+"px";
+		}
+		function moveRight(){
+			c+=10;
+			document.getElementById("minion").style.left = c+"px";
+		}
+		function moveUp(){
+			r-=10;
+			document.getElementById("minion").style.top = r+"px";
+		}
+		function moveDown(){
+			r+=10;
+			document.getElementById("minion").style.top = r+"px";
+		}
+		function moveRotate(){
+			d+=10;
+			document.getElementById("minion").style.transform = 
+			"rotate("+d+"deg)";
+		}
+		function setScaleUp(){
+			w++; h++;
+			document.getElementById("minion").style.transform = "scale("+w+","+h+")";
+		}
+		function setScaleDown(){
+			w--; h--;
+			document.getElementById("minion").style.transform = "scale("+w+","+h+")";
+		}
+
+	</script>
+</head>
+<body>
+	<input id="left" type="button" value="left" onClick="moveLeft()">
+	<input id="right" type="button" value="right" onMouseOver="moveRight()">
+	<input id="up" type="button" value="up" onClick="moveUp()">
+	<input id="down" type="button" value="down" onClick="moveDown()">
+	<input id="rotate" type="button" value="rotate" onClick="moveRotate()">
+	<input id="scale" type="button" value="scaleUp" onClick="setScaleUp()">
+	<input id="scale" type="button" value="scaleDown" onClick="setScaleDown()">
+	<img id="minion" src="../images/minion.jpg" width="200px">
+</body>
+</html>

@@ -1,0 +1,12 @@
+SQL> --스풀을 가동한 후 반드시 끝날 땐 가동중단
+SQL> --해야 파일이 제대로 저장된다.
+SQL> --조회하는 문장
+SQL> select name, money from member;
+
+NAME                      MONEY                                                 
+-------------------- ----------                                                 
+김태현                     3000                                                 
+aaa                        1000                                                 
+aaa                        2000                                                 
+
+SQL> spool off

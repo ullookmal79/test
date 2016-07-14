@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#wrapper{
+			width:500px;
+			margin-left:auto;
+			margin-right:auto;
+			margin-top:200px;
+			text-align:center;
+			font-size:15pt;
+		}
+		#mask{
+			width:500px;
+			height:340px;
+			overflow:hidden;
+		}
+		#box{
+			height:340px;
+			
+		}
+		a{
+			/* 밑줄 없애기 */
+			text-decoration:none;
+			color:black;
+		}
+		a:hover{
+			/* a태그 위에 마우스를 올려놓으면*/
+			color:orange;
+		}
+	</style>
+	<script>
+		var imgArr = [
+			"../images/shurek/img0.jpg",
+			"../images/shurek/img1.jpg",
+			"../images/shurek/img2.jpg",
+			"../images/shurek/img3.jpg",
+			"../images/shurek/img4.jpg",
+			"../images/shurek/img5.jpg",
+			"../images/shurek/img6.jpg"
+		];
+		var box;			//box가 이동될 값
+		var x = 0;
+		var a=0.9;		//부드러운 정도
+
+		function init(){
+			box=document.getElementById("box");
+			box.style.width=500*imgArr.length + "px";
+
+			for(var i=0; i<imgArr.length; i++){
+				var img = document.createElement("img");
+				img.src=imgArr[i];
+				box.appendChild(img);
+			}
+
+			move();
+		}
+
+		function showImg(pos){
+			x = -pos*500;
+			
+		}
+
+		function move(){
+			box.style.left = x - a*(x-parseFloat(box.style.left)) + "px";
+			setTimeout("move()", 10);
+		}
+
+	</script>
+</head>
+<body id="bd" onLoad="init()">
+	<div id="wrapper">
+		<div id="mask">
+			<div id="box"
+				style="position:relative;
+					left:0px; top:0px">
+				<!--
+				<img src="../images/shurek/img0.jpg">
+				<img src="../images/shurek/img1.jpg">
+				<img src="../images/shurek/img2.jpg">
+				<img src="../images/shurek/img3.jpg">
+				<img src="../images/shurek/img4.jpg">
+				<img src="../images/shurek/img5.jpg">
+				<img src="../images/shurek/img6.jpg">
+				-->
+			</div>
+		</div>
+			<a id="a1" href="javascript:showImg(0)">●</a>
+			<a id="a2" href="javascript:showImg(1)">●</a>
+			<a id="a3" href="javascript:showImg(2)">●</a>
+			<a id="a4" href="javascript:showImg(3)">●</a>
+			<a id="a5" href="javascript:showImg(4)">●</a>
+			<a id="a6" href="javascript:showImg(5)">●</a>
+			<a id="a7" href="javascript:showImg(6)">●</a>
+	</div>
+</body>
+</html>

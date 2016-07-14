@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#stage{
+			width:800px;
+			height:600px;
+			margin:auto;
+		}
+		#inputData{
+			width:150px;
+			height:600px;
+			background:#3399ff;
+			float:left;
+		}
+		#showData{
+			width:650px;
+			height:600px;
+			background:#ffcc99;
+			float:left;
+		}
+	</style>
+	<script>
+		var id; 
+		var pw;
+		var nm;
+		var money;
+		var btn;
+		var table;
+		var showData;
+		var total_tr;
+		var total_td;
+		//검색 관련 변수
+		var search;
+		var result;
+
+		var dataList = new Array();		//data를 담을 전체 배열
+		var index = 0;
+
+		window.addEventListener("load", function(){
+			init();
+		});
+
+		function init(){
+			id = document.getElementById("id");
+			pw = document.getElementById("pw");
+			nm = document.getElementById("nm");
+			money = document.getElementById("money");
+			btn = document.getElementById("btn");
+
+			showData = document.getElementById("showData");
+
+			//실행시킬 함수
+			pass();
+		}
+
+		function pass(){
+			//초기화 작업
+			table = document.createElement("table");
+
+			btn.addEventListener("click", function(){	
+				if(!id.value){
+					alert("id를 입력하세요!");
+					id.focus();
+				}
+				else if(!pw.value){
+					alert("pw를 입력하세요!");
+					pw.focus();
+				}
+				else if(!nm.value){
+					alert("name을 입력하세요!");
+					nm.focus();
+				}
+				else if(!money.value){
+					alert("money를 입력하세요!");
+					money.focus();
+				}
+				else{
+					//table 지우고,
+					table.innerHTML="";
+					//새로 찍어내기
+					getTitle();
+					getList();
+					getTotal();
+				}
+			});
+			
+		}
+
+		function getList(){
+			var dataArr = [
+				id.value,	pw.value,	nm.value,	money.value
+			];
+			dataList.push(dataArr);
+
+
+			var len = dataList.length;
+			var num = len;
+
+			for(var i=len-1; i>=0; i--){
+				var tr = document.createElement("tr");
+				var no_td = document.createElement("td");
+				var id_td = document.createElement("td");
+				var pw_td = document.createElement("td");
+				var nm_td = document.createElement("td");
+				var money_td = document.createElement("td");
+
+				no_td.innerText = (--num);
+				id_td.innerText = dataList[i][0];
+				pw_td.innerText = dataList[i][1];
+				nm_td.innerText = dataList[i][2];
+				money_td.innerText = dataList[i][3];
+
+				tr.appendChild(no_td);
+				tr.appendChild(id_td);
+				tr.appendChild(pw_td);
+				tr.appendChild(nm_td);
+				tr.appendChild(money_td);
+
+				table.appendChild(tr);
+			}
+
+			//textbox 지우기
+			id.value="";	pw.value=""; 	nm.value="";	
+			money.value="";
+		}
+
+		function total(){
+			var sum = 0;
+			for(var i=0; i<dataList.length; i++){
+				sum += Number(dataList[i][3]);
+			}
+			return sum;
+		}
+
+		function getTotal(){
+			total_tr = document.createElement("tr");
+			total_td = document.createElement("td");
+
+			total_td.innerText = "TOTAL :" + total();
+
+			total_tr.appendChild(total_td);
+
+			table.appendChild(total_tr);
+		}
+
+		function getTitle(){
+			
+			table.style.width = 600 + "px";
+			table.style.border = 1 + "px";
+
+			var columnTr = document.createElement("tr");
+			var noTd = document.createElement("td");
+				noTd.innerText = "no";
+			var idTd = document.createElement("td");
+				idTd.innerText = "id";
+			var pwTd = document.createElement("td");
+				pwTd.innerText = "PW";
+			var nmTd = document.createElement("td");
+				nmTd.innerText = "NAME";
+			var moneyTd = document.createElement("td");
+				moneyTd.innerText = "MONEY";
+			
+			//td -> tr로 appendChild 작업
+			columnTr.appendChild(noTd);
+			columnTr.appendChild(idTd);
+			columnTr.appendChild(pwTd);
+			columnTr.appendChild(nmTd);
+			columnTr.appendChild(moneyTd);
+			//tr -> table로 appendChild 작업
+			table.appendChild(columnTr);
+
+			showData.appendChild(table);
+		}
+
+		function search(){
+			//table 지우고,
+			table.innerHTML="";
+
+			search = document.getElementById("search");
+			result = document.getElementById("result");
+			for(var i=0; i<dataList.length; i++){
+				if(search.value == dataList[i][2]){
+					getTitle();
+
+					//table = document.createElement("table");
+					var tr = document.createElement("tr");
+					var no_td = document.createElement("td");
+					var id_td = document.createElement("td");
+					var pw_td = document.createElement("td");
+					var nm_td = document.createElement("td");
+					var money_td = document.createElement("td");
+					console.log('!!!');
+					no_td.innerText = i;
+					id_td.innerText = dataList[i][0];
+					pw_td.innerText = dataList[i][1];
+					nm_td.innerText = dataList[i][2];
+					money_td.innerText = dataList[i][3];
+
+					tr.appendChild(no_td);
+					tr.appendChild(id_td);
+					tr.appendChild(pw_td);
+					tr.appendChild(nm_td);
+					tr.appendChild(money_td);
+					table.appendChild(tr);
+
+				}
+			}
+		}
+
+	</script>
+</head>
+<body>
+	<div id="stage">
+		<div id = "result">
+			이름 : <input id="search" type="text">
+			<input id="btnSearch" type="button" value="검색" onClick="search()">
+			
+		</div>
+		<div id="inputData">
+			ID:<input id="id" type="text"><br>
+			PW:<input id="pw" type="text"><br>
+			NAME:<input id="nm" type="text"><br>
+			MONEY:<input id="money" type="text"><br>
+			<input id="btn" type="button" value="확인">
+		</div>
+		<div id="showData"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#wrapper{
+			height:800px;
+			width:100%;
+			background:#ffcc99;
+		}
+		#aaa{
+			position:absolute;
+			left:30px;
+			top:300px;
+			font-size:50pt;
+		}
+		#bbb{
+			position:absolute;
+			left:30px;
+			top:200px;
+			font-size:50pt;
+		}
+	</style>
+	<script>
+	var Arrow = function(){
+		this.x1 = 30;
+		this.x2 = 30;
+		this.aaa;		
+		this.bbb;
+		this.st;				//setTimeout() 1
+		this.btn;
+
+		this.move = function(){
+			var me =this;
+			this.aaa = document.getElementById("aaa");
+			this.bbb = document.getElementById("bbb");
+			this.aaa.style.left = this.x1 + "px";
+			this.bbb.style.left = this.x2 + "px";
+			this.aaa.style.color = "red";
+			this.bbb.style.color = "blue";
+			this.x1 += 5;
+			this.x2 += 10;
+
+			this.st = setTimeout(function(){
+				me.move();
+			}, 100);
+		}
+
+		this.stop = function(){
+			clearTimeout(st);
+			this.btn=document.getElementById("btn");
+			this.btn.value="GO";
+			console.log(btn.value);
+		}
+	}
+
+function test(){
+	for(var i=0; i<10; i++){
+		var a1 = new Arrow();
+	a1.move();
+	}
+}
+
+	</script>
+</head>
+<body onLoad="test()">
+	<div id="wrapper">
+		<input id="btn" type="button" value="STOP" onClick="stop()">
+		<span id="aaa">→</span>
+		<span id="bbb">→</span>
+	</div>
+</body>
+</html>

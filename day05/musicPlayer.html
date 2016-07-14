@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#mp3Displ{
+			background:#99ccff;
+			width:500px;
+			height:100px;
+			//border:3px solid green;
+			font-size:30pt;
+			color:#cc3300;
+		}
+	</style>
+	<script>
+		var flag = false;
+		var n = 1;
+		function play(){
+			//document.getElementById("music").loop()=document.getElementById("btn_check").checked;
+			//체크박스의 상태에 따라 loop여부를 결정.
+			document.getElementById("music").load();
+			if(!flag){
+				document.getElementById("music").play();
+				document.getElementById("music_name").innerText=n+".mp3";
+				document.getElementById("btn_play").value="∥";
+			}
+			else{
+				document.getElementById("music").pause();
+				document.getElementById("btn_play").value="▶";
+			}
+			flag=!flag;
+		}
+		
+		function stop(){
+			document.getElementById("music").load();
+		}
+
+		function next(){
+			n++;
+			document.getElementById("music_name").innerText=n+".mp3";
+			document.getElementById("dest").src="../music/"+n+".mp3";
+			//메모리에 로딩 될 시간을 주어야 함.
+			document.getElementById("music").load();
+			document.getElementById("music").play();
+			if(n==9)
+				n=1;
+		}
+
+		function prev(){
+			n--;
+			document.getElementById("music_name").innerText=n+".mp3";
+			document.getElementById("dest").src="../music/"+n+".mp3";
+			document.getElementById("music").load();
+			document.getElementById("music").play();
+			if(n==1)
+				n=9;
+		}
+
+		function loop(){
+			
+		}
+	</script>
+</head>
+<body>
+	<audio id="music">
+		<source id="dest" src="../music/1.mp3" type="audio/mpeg">
+	</audio>
+	<div id="mp3Displ">
+		<marquee id="music_name">playing</marquee>
+	</div>
+	<input type="button" value="◀◀" onClick="prev()">
+	<input type="button" value="■" onClick="stop()">
+	<input id="btn_play" type="button" value="▶" onClick="play()">
+	<input type="button" value="▶▶" onClick="next()">
+	<input id="btn_check" type="checkbox" value="repeat">
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#wrapper{
+			width:650px;
+			height:600px;
+			margin:auto;
+		}
+		#leftSide{
+			width:150px;
+			height:600px;
+			background:#6699cc;
+			float:left;
+		}
+		ul{
+			list-style:none;
+			padding:10px;
+		}
+		/*모든 텍스트박스의 크기 조정*/
+		.inputStyle{
+			width:100px;
+			border:1px solid #cccccc;
+		}
+		#rightSide{
+			width:500px;
+			height:600px;
+			background:#ffff99;
+			float:left;
+		}
+		#up{
+			width:100%;
+			height:30px;
+			text-align:center;
+			background:#ffcc66;
+		}
+		#down{
+			width:100%;
+			height:570px;
+			overflow:scroll;
+		}
+		
+
+	</style>
+	<script src="./Member.js"></script>
+	<script>
+		var txtId,	txtPw,	txtName,	txtMoney,		txtSearch;
+		var btnResist, btnList, btnSearch;
+
+		var down;
+		var table;
+
+		//회원들을 담을 큰 공간!
+		var memberList = new Array();		
+
+		window.addEventListener("load", function(){
+			txtId = document.getElementById("txtId");
+			txtPw = document.getElementById("txtPw");
+			txtName = document.getElementById("txtName");
+			txtMoney = document.getElementById("txtMoney");
+			txtSearch = document.getElementById("txtSearch");
+			btnRegist = document.getElementById("btnResister");
+			btnList = document.getElementById("btnList");
+			btnSearch = document.getElementById("btnSearch");
+
+			down = document.getElementById("down");
+
+			//버튼들에 대한 이벤트 등록
+			btnRegist.addEventListener("click", function(){
+				regist();
+			});
+			btnList.addEventListener("click", function(){
+				clearList();
+				getTitle();
+				getList();
+				
+			});
+			btnSearch.addEventListener("click", function(){
+				getListBySearch();
+			});
+
+			//초기화작업
+			getTitle();
+		});
+		
+		function regist(){
+			alert('등록!');
+
+			var member = new Member();
+			member.id = txtId.value;
+			member.pw = txtPw.value;
+			member.name = txtName.value;
+			member.money = txtMoney.value;
+			
+			//배열에 회원 담기
+			memberList.push(member);
+			//alert("등록된 회원수는" + memberList.length);
+			reset();
+			clearList();
+			getTitle();
+			getList();
+		}
+
+		function clearList(){
+			//기존 테이블에 appendChild되어있던 하위요소들을 모두 지우자!
+			table.innerHTML="";
+			down.removeChild(table);
+		}
+
+		function getList(){
+			//우측에 존재하는 테이블에 회원수만큼의 tr을 추가해야 한다!
+			var total = memberList.length;
+			var sum = 0;		//돈의 합계
+			
+			for(var i=total-1; i>=0; i--){
+				var member = memberList[i];
+
+				var tr = document.createElement("tr");
+
+				var tdNo = document.createElement("td");
+				var tdId =document.createElement("td");
+				var tdPw = document.createElement("td");
+				var tdName = document.createElement("td");
+				var tdMoney = document.createElement("td");
+
+				tdNo.innerText = total--;
+				//tdId.innerText = member.id;
+				tdPw.innerText = member.pw;
+				tdName.innerText = member.name;
+				tdMoney.innerText = member.money;
+
+				sum += parseInt(member.money);
+
+				tr.appendChild(tdNo);
+				tr.appendChild(tdId);
+				tr.appendChild(tdPw);
+				tr.appendChild(tdName);
+				tr.appendChild(tdMoney);
+
+				//console.log(memberList[i].id+" "+memberList[i].pw+" "+memberList[i].name+" "+memberList[i].money);
+
+				//tr을 기존 테이블에 부착!!
+				table.appendChild(tr);
+			}
+			//합계 tr 추가하기!	td가 5개
+			var trSum = document.createElement("tr");
+			var tdSum = document.createElement("td");
+			tdSum.colSpan = "5";
+			tdSum.style.textAlign="right";
+			tdSum.innerText="합계 : "+sum+"원";
+			trSum.appendChild(tdSum);
+			table.appendChild(trSum);
+		}
+
+		function getListBySearch(){
+			alert();
+			var resultList = new Array();		//검색 결과를 담을 배열
+
+			for(var i=0; i<memberList.length; i++){
+				var member = memberList[i];
+				
+				//검색 결과가 있다면,
+				if(txSearch.value==member.id){
+					alert(i+"번째에서" + member.id);
+					resultList.push(member);
+				}	
+			}
+			//getList 함수가 사용중인 memberList를 resultList로 대체
+			memberList = resultList;
+
+			clearList();
+			getTitle();
+			getList();
+		}
+
+		function getTitle(){
+			var columnTitle = ["no", "ID", "PW", "Name", "Money"];
+
+			table=document.createElement("table");
+			table.style.border = "1px solid black";
+			table.style.width = "100%";
+
+			var tr = document.createElement("tr");
+			tr.style.textAlign="center";
+
+			for(var i=0; i<columnTitle.length; i++){
+				var td = document.createElement("td");
+			td.innerText=columnTitle[i];
+				tr.appendChild(td);
+			}
+			table.appendChild(tr);
+
+			//div에 table 부착
+			down.appendChild(table);
+		}
+
+		//등록 후, 등록폼을 다시 초기화하기
+		function reset(){
+			txtId.value="";
+			txtPw.value="";
+			txtName.value="";
+			txtMoney.value="";
+		}
+
+	</script>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="leftSide">
+			<ul>
+				<li>ID : <input id="txtId" type="text"  class="inputStyle"></li>
+				<li>PW : <input id="txtPw" type="text" class="inputStyle"></li>
+				<li>NAME : <input id="txtName" type="text" class="inputStyle"></li>
+				<li>MONEY : <input id="txtMoney" type="text" class="inputStyle"></li>
+				<li><input id="btnResister" type="button" value="등록">
+				<input id="btnList" type="button" value="조회"></li>
+			</ul>
+		</div>
+		<div id="rightSide">
+			<div id="up">
+				<input type="text">
+				<input id="btnSearch" type="button" value="검색">
+			</div>
+			<div id="down"></div>
+		</div>
+	</div>
+</body>
+</html>

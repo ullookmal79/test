@@ -1,0 +1,16 @@
+﻿<4일차>
+
+*지우기
+	delete from member where name='배트맨' 
+
+*데이터를 구분하기 위한 용도의 컬럼을 무조건 추가해야한다.
+	=>제약조건
+	ex) PRIMART KEY
+
+*두 테이블을 합쳐서 정보를 가져오는 방법
+	
+select ename, sal, dname, loc from emp, dept where emp.deptno=dept.deptno;
+
+*최대 급여를 받는 사원의 이름, 급여, 부서이름을 출력하세요.
+select ename, sal, dname from emp, dept where emp.sal=(select max(sal) from emp);
+	

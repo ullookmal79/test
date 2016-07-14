@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#stage{
+			width:100%;
+			height:800px;
+			background:#99cccc;
+		}
+	</style>
+	<script>
+		var stage;
+
+		function init(){
+			for(var i=0; i<100; i++ ){
+				var a = new Bullet(i*10);
+				a.init();
+			}
+		}
+
+		var Bullet = function(posY){
+			this.span;
+			this.x;					//총알의 left값
+			this.y = posY;					//총알의 right값
+			
+			this.init = function(){
+				var me;
+				this.span=document.createElement("span");
+				this.span.innerText="●";
+				this.span.style.color="#0099ff";
+				this.span.style.left = this.x + "px"';
+				this.span.style.top = this.y + "px";
+				
+				stage=document.getElementById("stage"):
+				stage.appendChild(this.span);
+			}
+
+			this.move = function(){
+				x += 10;
+				me.move();
+				setTimeout(function(){
+					
+				}, 100);
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="stage">
+		
+	</div>
+</body>
+</html>

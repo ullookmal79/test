@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		
+	</style>
+	<script>
+		var mario;
+		//피카추가 도달할 목표지점
+		var targetX=700;
+		var targetY=0;
+		var a=0.1;
+
+		function move(){
+			//alert(parseInt(pica.style.left));
+			targetX=event.clientX;
+			targetY=event.clientY;
+			
+		}
+		
+		function init(){
+			mario=document.getElementById("mario");
+			mario.style.left=targetX - a*(targetX  - parseInt(mario.style.left))+"px";
+			mario.style.top=targetY - a*(targetY  - parseInt(mario.style.top))+"px";
+
+			setTimeout("move()", 10);
+			//목표지점 - 비율계수*(목표지점 - 나의 위치);
+		}
+	</script>
+</head>
+<body onLoad="init()" onKeyDown="move()">
+	<div style="width:100%; height:800px; background=yellow">
+	<img id="mario" src="../images/mario.png"  style="position:absolute; width:50px; left:0px; top:200px;" onMouseOver="move()">
+	</div>
+</body>
+</html>

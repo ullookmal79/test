@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		var arr = new Array(3);
+		arr[0] = "가위.png";
+		arr[1] = "바위.png";
+		arr[2] = "보.png";
+		var r = Math.random();
+		var n = parseInt(r*arr.length);
+		
+		document.write(n);
+		document.write("<img src=\"../images/RSP/"+arr[n]+"\">");
+	</script>
+</head>
+<body>
+
+</body>
+</html>

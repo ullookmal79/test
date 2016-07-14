@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		var result = prompt("1.오렌지 2.사과 3.멜론 4.체리 \n원하시는 과일번호를 선택하세요.");				
+		//입력창
+		alert("당신이 입력한 결과값은 "+result+"군요.");
+	</script>
+</head>
+<body>
+
+</body>
+</html>

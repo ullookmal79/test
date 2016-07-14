@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			margin:0px;
+		}
+		div{
+			background:yellow;
+			height:800px;
+		}
+	</style>
+	<script>
+		var wrapper=0;
+		var w =100;				//도장의 가로폭, 너비
+		var h =100;				//도장의 높이
+		function init(){
+			wrapper=document.getElementById("wrapper");
+			//문서내에 태그를 생성하여 부착하자!
+			
+		}
+
+		function stamp(){
+			var img = document.createElement("img");
+			img.src="../images/stamp.png";
+			img.style.width=w+"px";
+			img.style.height=h+"px";
+			img.style.position="absolute";
+
+			console.log(event.clientX + " " + event.clientY);
+		console.log((event.clientX - w/2) + " " + (event.clientY -h/2));
+			img.style.left=(event.clientX-w/2)+"px";
+			//마우스 클릭시의 x좌표
+			img.style.top=(event.clientY-h/2)+"px"
+			//마우스 클릭시의  y좌표
+			wrapper.appendChild(img);
+		}
+
+	</script>
+</head>
+<body onLoad="init()" onMouseDown="stamp()">
+	<div id="wrapper">
+		 <img src="" width="">
+	</div>
+</body >
+</html>
+
+<!-- 
+	innerText
+	<div> 태그 안의 글자값들
+-->

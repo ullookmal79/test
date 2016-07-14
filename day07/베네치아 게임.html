@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#stage{
+		height:600px;
+		width:100%;
+		background-image:url("../images/gameBg.img");
+		}
+		#button{
+		height:250px;
+		background:#99ccff;
+		text-align:center;
+		}
+		#hp{
+		width:176px;
+		height:162px;
+		background:pink;
+		}
+		#info{
+		width:300px;
+		height:162px;
+		}
+		#keyword{
+			width:250px;
+			height:50px;
+			font-size:35pt;
+		}
+	</style>
+	<script>
+		var word = [
+			"aaa",
+			"bbb",
+			"ccc",
+			"ddd",
+			"eee",
+			"fff",
+			"ggg",
+			"hhh",
+			"iii",
+			"jjj"
+		];
+
+		var hp;
+		var floorArr = new Array(3);		//층수 배열
+		var stage;
+		var wordArr = new Array(word.length);
+		var step=10;	//몇 픽셀씩 내려오게 할지를 결정하는 변수
+		var st;			//setTimeout 을 중지시키기 위한 변수
+		var keywod;		//단어 입력폼
+		var score;
+		var score_num=0;
+		var limit;		//단어들이 넘지 말아야 할 y축의 한계점	
+		
+		function init(){
+			hp=document.getElementById("hp");
+			stage=document.getElementById("stage");
+			keyword=document.getElementById("keyword");
+			score=document.getElementById("score");
+
+			//현재 state의 height를 구해보자
+			limit=parseInt(stage.style.height);
+
+			createHp();		//체력 생성 및 보여주기
+			createTag();			//단어 생성 및 보여주기
+
+			//문서가 로드되면 hp를 표현하는 테이블을 3*4개로 구성해본다.
+		}
+
+		function createHp(){
+			var table=document.createElement("table");
+			table.style.border="2px solid yellow";
+
+			for(i=0; i<3; i++){
+				var tr=document.createElement("tr");
+
+				var hoArr = new Array(4);
+
+				for(var j=0; j<4; j++){
+					var td=document.createElement("td");
+					td.style.width=50+"px";
+					td.style.height=50+"px";
+					td.style.background="red";
+					tr.appendChild(td);
+
+					hoArr[j] = td;
+				}
+				floorArr[i] = hoArr;
+				table.appendChild(tr);
+			}
+
+			//hp div에 table 추가!
+			hp.appendChild(table);
+		}
+
+		function start(){
+			//floorArr[2][2].style.background="white";
+			//top 값이 증가하도록...
+			//span태그를 단어만큼 생성하여, stage에 부착하자.
+			drop();
+			keyword.focus();
+		}
+
+		//텍스트가 내려오는 효과
+		function drop(){
+			//step+=10;
+			for(var i=0; i<wordArr.length; i++){
+					wordArr[i].style.top= parseInt(wordArr[i].style.top)+step+"px";
+			}
+
+			if(parseInt(wordArray[1].style.top) >= limit){
+				//alert("도달했네요!!");
+				for(var i=0; i<3; i++){
+					for (var j=0; j<4; j++){
+						floorArray[i][j].style.background="#FFFFFF";
+					}
+				}
+			}
+
+			var speed=document.getElementById("sel").value;
+			st=setTimeout("drop()", speed);
+			console.log(speed);
+		}
+
+		function createTag(){
+
+			for(var i=0; i<word.length; i++){
+				var r=parseInt(Math.random()*100);	//0~0.xxx 난수
+				var span = document.createElement("span");
+				span.style.position="relative";
+				span.style.left=-r +"px";
+				span.style.top= 0+"px";
+				span.innerText=word[i];
+				stage.appendChild(span);
+
+				//span은 지역변수 for문이 모두 돌아간 후 접근 불가 따라서 전역 배열에 담아두자.
+				wordArr[i] = span;
+
+			}
+
+			var level=document.
+			
+		}
+
+		//게임 일시정지
+		function pause(){
+			clearTimeout(st);
+		}
+
+		function enter(){
+			var key = event.keyCode;
+			if(key==13){
+				for(var i=0; i<word.length; i++){
+					if(wordArr[i].innerText == keyword.value){
+						wordArr[i].innerText="";
+						//텍스트 입력창에 입력 후 enter 치면 지워짐.
+						keyword.value="";
+						//점수 10점 올리기
+						score_num+=10;
+						score.value = score_num;
+					}
+					else{
+						
+					}
+				}
+			}
+		}
+
+	</script>
+	</head>
+<body onLoad="init()">
+	<div id="wrapper">
+		<div id="stage"></div>
+		<div id="button">
+			<div id="info">
+				<select id="sel">
+					<option value="1500">1단계</option>
+					<option value="1200">2단계</option>
+					<option value="900">3단계</option>
+					<option value="500">4단계</option>
+					<option value="250">5단계</option>
+				</select>
+				<input type="button" value="start" onClick="start()">
+				<input id="score" type="text" value="0" size="5"> 점 <br> <input id="keyword" type="text" onKeyUp="enter()">
+				<div id="hp">테이블</div>
+			</div>	
+		</div>
+	</div>
+</body>
+</html>

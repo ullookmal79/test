@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#wrapper{
+			width:100%;
+			height:800px;
+			background:pink;
+		}
+	</style>
+	<script>
+		var stamps=new Array();
+
+		function init(){
+			var wrapper=document.getElementById("wrapper");
+		}
+
+		function stamp(){
+			var img = document.createElement("img");
+
+			img.src="../images/stamp.png";
+			img.style.width="100px";
+			img.style.height="100px";
+			img.style.position="absolute";
+			img.style.left=(event.clientX - 50) + "px";
+			img.style.top=(event.clientY - 50) + "px";
+
+			wrapper.appendChild(img);
+		}
+	</script>
+</head>
+<body onLoad="init()" onMouseDown="stamp()">
+	<div id="wrapper"></div>
+</body>
+</html>

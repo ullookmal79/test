@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		var x = 1;
+		var y = 1;
+		function next(){
+			console.log(x);
+			(x==18) ? (x=1) : (x++)
+			document.getElementById("img1").src = "../images/warior/image"+x+".png";
+		}
+		function breath(){
+			
+			//while(true){
+				y++;
+				//(y==18) ? (y=1) : (y++)
+				if(y==18)
+					y=1;
+				else
+					y++;
+				document.getElementById("img1").src = "../images/warior/image"+y+".png";
+			//}
+		}
+	</script>
+</head>
+<body>
+	<img id="img1" src = "../images/warior/image1.png">
+	<input type="button" value="breathOnClick" onClick="next()"><br>
+	<input type="button" value="breath" onClick="breath()"><br>
+	
+</body>
+</html>

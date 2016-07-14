@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		//한 줄 주석
+		/*
+		이 영역은 프로그래밍 작성 영역이므로,  html과는 차원이 다르다.
+		따라서 대소문자나 정확하지 않은 문법은 모두 에러로 간주
+		*/
+
+		// {} 브레이스
+		function next(){		// 개발자가 next함수를 정의함!
+			alert("나 불렀어?");
+			//문서내의 이미지를 다른 것으로 바꾼다.
+			document.getElementById("photo").src="../images/img02.jpg";
+			//문서 내의 포토라는 요소를 
+		}
+	</script>
+</head>
+<body>
+	<img id="photo" src="../images/img01.jpg" width="400px" >
+	<input type="button" value="버튼" onClick="	next()">
+</body>
+</html>

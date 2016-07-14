@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#stage{
+
+			height:800px;
+		}
+	</style>
+	<script src="../lib/Bullet.js"></script>
+	<script src="../lib/flame.js"></script>
+	<script>
+		var stage;
+		var divShip;		//우주선과 불꽃이 같이 들어있는 div
+		this.imgShip;		//우주선 img  ,받을 매개변수 x
+		//this.imgFlame;	//불꽃 이미지, 받을 매개변수
+		var s;				//우주선 객체 변수
+		var f;				//불꽃 객체 변수
+
+		//loadEvent 처리
+		window.addEventListener("load", function(){
+			stage = document.getElementById("stage");
+			divShip = document.getElementById("divShip");
+
+			//프로그래밍적으로 stage의 width지정
+			stage.style.width = 1000 + "px";
+			s = new Ship(200, 200, 200, 140, stage);
+			s.init();
+
+			//불꽃 만들기
+			f = new Flame(stage, 50, 50, 200, 200);
+			f.init();
+			
+			//divShip 자식으로 불꽃, 우주선 넣기
+			divShip.appendChild(imgShip);
+			divShip.appendChild(f.img);
+
+		});
+
+		//마우스 이벤트 처리
+		//"keydown"  정해진 키워드
+		window.addEventListener("keydown", function(){
+			var key = event.keyCode;
+			if(key == 32){
+				//alert('총알??');
+				var b = new Bullet(stage, s.left+s.width, s.top+s.height/2);
+				b.init();
+			}
+			else if(key==37){		//좌측
+				s.left-=10;
+				console.log("좌"+s.left);
+				s.go();
+			}
+			else if(key==38){		//위쪽
+				s.top -=10;
+				console.log("위"+s. top);
+				s.go();
+			}	
+			else if(key==39){		//우측
+				//x좌표 증가
+				s.left +=10;
+				console.log("우"+s.left);
+				s.go();
+			}
+			else if(key==40){		//아래쪽
+				s.top +=10;
+				console.log("하"+s.top);
+				s.go();
+			}
+		});
+
+		var Ship = function(left, top, width, height, area){
+			this.left=left;						//left
+			this.top=top;					//top
+			this.width=width;				//너비
+			this.height=height;			//높이	
+			this.area=area;					//img의 상위 영역 ex) stage
+
+			//img 태그 만들기  
+			//!아직	appendChild작업은 하지 않은 상태 
+			
+			this.init = function(){
+				
+				imgShip=document.createElement("img");
+		
+				//imgShip src 설정
+				imgShip.src = "../images/spaceship.jpg";
+
+				//imgShip style 설정
+				imgShip.style.position = "absolute";
+				imgShip.style.left =	this.left+ "px";
+				imgShip.style.top = this.top+ "px";
+				imgShip.style.width = this.width + "px";
+				imgShip.style.height = this.height + "px";
+
+				
+
+				//stage의 appendChild 작업
+				//stage.appendChild(this.imgShip);
+
+				//초기화 작업에서 몸체 메소드 한 번 호출
+				this.move();
+			}
+
+			//move() 메소드
+			this.go=function(){
+				this.imgShip.style.left = this.left + "px";
+				this.imgShip.style.top = this.top + "px";
+			}
+
+			this.moveLeft = function(){
+				this.imgShip.left -=5;
+			}
+			this.moveUp = function(){
+				this.imgShip.top -=5;
+			}
+			this.moveRight = function(){
+				this.imgShip.left +=5;
+			}
+			this.moveDown = function(){
+				this.imgShip.top +=5;
+			}
+	
+			this.move = function(){
+				
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="stage">
+		<div id="divShip"></div>
+	</div>
+
+</body>
+</html>

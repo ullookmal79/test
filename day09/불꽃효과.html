@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#stage{
+			width:100%;
+			height:800px;
+		}
+	</style>
+	<script src="../lib/flame.js"></script>
+	<script>
+	var stage;
+	//var img;
+	//var arr = new Array();
+
+		window.addEventListener("load", function(){
+			//alert("문서 다 읽음");
+			stage = document.getElementById("stage");
+
+			//불꽃을 메모리에 올리고, 작동시켜보자.
+			var flame=new Flame(stage, 100, 80, 0, 0);
+			flame.init();
+		});
+
+		//불꽃을 정의
+		//a:어떤 div에 붙을 지
+		//w:가로 크기
+		//h:높이
+		//posX:초기 X좌표 위치
+		//posY:초기 y좌표 위치
+		
+	</script>
+</head>
+<body onload="">
+	<div id="stage"></div>
+</body>
+</html>

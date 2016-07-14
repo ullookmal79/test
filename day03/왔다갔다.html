@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>왔다갔다</title>
+	<style>
+		#minions{
+			position:absolute;
+			left:100px;
+			top:200px;
+			width:200px;
+		}
+	</style>
+	<script>
+		var x = 100; var flag = true;
+		function move(){
+			if(flag){
+				x += 10;
+				if(x == 400)
+					flag = false;
+			}
+			else{
+				x -= 10;
+				if( x==100)
+					flag = true;
+			}
+			console.log(x);
+			document.getElementById("minions").style.left = x + "px";
+		}
+	</script>
+</head>
+<body>
+	<img id="minions" src = "../images/minions.jpg">
+	<input type="button" value="왔다갔다" onClick="move()">
+</body>
+</html>

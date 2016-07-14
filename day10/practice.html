@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#stage{
+			width:650px;
+			height:600px;
+			margin:auto;
+		}
+		#inputData{
+			width:150px;
+			height:600px;
+			background:#cc3333;
+			float:left;
+		}
+		#showData{
+			width:500px;
+			height:600px;
+			background:#99ffff;
+			float:left;
+		}
+	</style>
+	<script>
+		var btn;
+		var id;		var pw;
+		//회원들의 id, pw 정보들을 저장하는 리스트
+		var memberList = new Array();
+		var table;
+		
+		//버튼의 이벤트 핸들러 처리
+		window.addEventListener("load", function(){
+			getTitle();
+			init();
+		});
+
+		function init(){
+			btn = document.getElementById("btn");
+			id = document.getElementById("id");
+			pw = document.getElementById("pw");				
+		
+			pass();
+		}
+
+		function pass(){
+
+			btn.addEventListener("click", function(){
+				//아이디 입력하지 않으면 경고
+				if(id.value == ""){
+					alert("id를 입력하세요.");
+					id.focus();
+				}
+				//패스워드 입력하지 않으면 경고
+				else if(pw.value == ""){
+					alert("pw를 입력하세요.");
+					pw.focus();
+				}
+				//둘 다 넣은 경우 통과
+				else if((id.value != "") && (pw.value != "")){
+					var member = [id.value, pw.value];
+				
+					//큰 배열에 담기!!
+					//기존 배열에 요소를 추가함!
+					memberList.push(member);
+					
+					alert(memberList.length+"번째 PASS");
+					
+					getList();
+				}
+			});
+		}
+
+		//제목을 처리하는 함수 정의!
+		function getTitle(){
+			//table 태그 추가
+			table = document.createElement("table");
+			table.style.width = 450 + "px";
+			table.style.border = 1 + "px";
+
+			//tr 태그 추가 -> 2차원 배열의 크기만큼
+			var tr = document.createElement("tr");
+
+			//td 태그 추가 -> 안쪽 1차원 배열의 크기만큼 = 3
+			var no = document.createElement("td");
+			no.innerText = "no";
+			var id = document.createElement("td");
+			id.innerText = "ID";
+			var pw = document.createElement("td");
+			pw.innerText = "PW";
+
+			//td태그들을 tr의 자식태그로 설정
+			tr.appendChild(no);
+			tr.appendChild(id);
+			tr.appendChild(pw);
+			//tr태그를 table의 자식태그로 설정
+			table.appendChild(tr);
+
+			//div에 테이블을 최종 출력
+			showData.appendChild(table);
+			//---------------------------------------------------------------------------------------------↑ 컬럼 설정
+		}
+
+		//appendChild의 특징상 테이블에 기존값이 누적되므로 리스트를 보여주기 전에 table의 자식요소들을 싹 지운다.
+		function initTable(){
+				table.innerHTML="";
+				getTitle();
+		}
+
+		function getList(){
+			initTable();
+			//---------------------------------------------------------------------------------------------↓데이터 정보 시작
+
+			var len = memberList.length;
+			var num = len;
+
+			for(var i=len-1; i>=0; i--){
+				var record_tr = document.createElement("tr");
+				var no_td = document.createElement("td");
+				var id_td = document.createElement("td");
+				var pw_td = document.createElement("td");
+			
+				no_td.innerText =	num--;
+				id_td.innerText = memberList[i][0];//id 넣기
+				pw_td.innerText = memberList[i][1];	//pw 넣기
+
+				record_tr.appendChild(no_td);
+				record_tr.appendChild(id_td);
+				record_tr.appendChild(pw_td);
+
+				table.appendChild(record_tr);
+			}
+			
+		}
+
+	</script>
+</head>
+<body>
+	<div id="stage">
+		<div id="inputData">
+			ID :<input id="id" type="text" size="7" maxlength="12" ><br>
+			PW :<input id="pw" type="password" size="7" maxlength="8"><br>
+			<input id="btn" type="button" value="등록" >
+		</div>
+		<div id="showData">
+		</div>
+	</div>
+</body>
+</html>

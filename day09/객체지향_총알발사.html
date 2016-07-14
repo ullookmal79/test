@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			margin:0px;
+		}
+		#stage{
+			width:100%;
+			height:800px;
+			background:#ffcc99;
+		}
+		
+	</style>
+	<script src="../lib/Bullet.js"></script>
+	<script>
+		var stage;
+
+		function init(){
+			stage = document.getElementById("stage");
+
+			//프로그래밍에서 이벤트 핸들러를 적용할 때...
+			window.addEventListener("keydown", function(){
+				var key=event.keyCode;
+				if(key==32)
+				
+					var b = new Bullet(stage, 100);
+					b.init();
+			});
+
+			/*
+			for(var i=0; i<100; i++){
+				var b=new Bullet(i*50);
+				b.init();
+			}
+			*/
+		}
+
+	</script>
+</head>
+<body onLoad="init()">
+	<div id="stage" >
+		<span></span>
+	</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#boxA, #boxB{
+			width:100px;
+			height:100px;
+			position:absolute;
+		}
+		#boxA{
+			background:orange;
+			left:100px;
+			top:100px;
+		}
+		#boxB{
+			background:blue;
+			left:500px;
+			top:300px;
+		}
+	</style>
+	<script src = "../lib/lib.js"></script>
+	<script>
+		window.addEventListener("load", function(){
+			boxA = document.getElementById("boxA");
+			boxB = document.getElementById("boxB");
+			
+			boxA.addEventListener("mousemove", function(){
+				boxA.style.left = (event.clientX-50) + "px";
+				boxA.style.top = (event.clientY-50) + "px";
+
+				//충돌감지~!!
+				var result = hitTest(boxA, boxB);
+				
+				if(result){
+					boxB.innerText = "충돌했어요!";
+				}
+				else{
+					boxB.innerText = "";
+				}
+			});
+		});
+		
+	</script>
+</head>
+<body>
+	<div id="boxA" style="position:absolute; left:100px; top:100px; width:100px; height:100px;">A</div>
+	<div id="boxB" style="position:absolute; left:500px; top:300px; width:100px; height:100px;">B</div>
+</body>
+</html>

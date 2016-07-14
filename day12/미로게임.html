@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+	body{margin:0px;}
+	#stage{
+		background:#99ccff;
+
+	}
+</style>
+<script src = "../lib/Hero.js"></script>
+<script src = "./Maze.js"></script>
+<script>
+	var stage;
+	var hero;
+	window.addEventListener("load", function(){
+		init();
+	});
+
+	function init(){
+		//stage
+		stage = document.getElementById("stage");
+		
+		stage.style.width=screen.width+"px";
+		stage.style.height = 800 + "px";
+
+		var a = 20;		//div정사각형 한 변의 길이
+		var countX = 0;
+		var countY = 0;
+		var count =(screen.width*800)/(a*a);
+
+		//div 깔기
+		for(var i=0; i<count; i++ ){
+			if((countX+1)*a >screen.width){
+				countY++;
+					if(countY*a >= 800)
+					return;
+				countX =0;
+			}
+			var m = new Maze(stage, a, countX*a, a*countY);
+			m.init();
+			countX++;
+			console.log(countX);
+		}
+
+		//주인공 등장!
+		hero = new Hero(stage, a, a, 100, 50, "../images/mario.png");
+		hero.init();
+	}
+
+	//상하좌우
+	window.addEventListener("keydown", function(){
+		var key = event.keyCode;
+
+		switch(key){
+			case 37:	hero.velX -=1;		break;
+			case 38:	hero.velY -=1;		break;
+			case 39:	hero.velX +=5;		break;
+			case 40:	hero.velY +=5;		break;
+		}
+	});
+	//방향키 떼었을 때 멈춤
+	window.addEventListener("keyup", function(){
+			var key = event.keyCode;
+			if(key==37 || key==38 || key==39 || key==40){
+				hero.velX = 0;
+				hero.velY = 0;
+			}
+	});
+
+	//이 게임의 경우 벽돌의 입장에서 hero와 hitTest 검사하는 것이 좋을듯 하다.
+
+
+
+	//10240
+</script>
+</head>
+<body>
+	<div id="stage"></div>
+</body>
+</html>
