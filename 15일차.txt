@@ -1,0 +1,34 @@
+﻿Oracle
+	-sun사
+	-Bea 사
+	-MySQL
+
+MariaDB
+
+
+*Dos명령어
+-help
+
+*붙여넣기
+-우측마우스 클릭
+
+*디렉토리 들어가기
+cd 주소
+
+*실행파일
+.exe 빼고 실행
+
+*mysql 접속
+mysql -h localhost -u root -p
+
+*테이블 생성시 다국어 지원하기
+create table test(
+	name varchar(20)
+) default charset utf8;
+
+테이블의 구조 출력
+desc member;
+
+*mariaDB 시작
+mariadb폴더->bin 에서 명령창 시작
+mysql -h localhost -u root -p
